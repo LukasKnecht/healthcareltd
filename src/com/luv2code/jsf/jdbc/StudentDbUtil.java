@@ -210,7 +210,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "delete from patient where id=?";
+			String sql = "delete from patient where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
