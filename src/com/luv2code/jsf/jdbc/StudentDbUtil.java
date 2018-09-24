@@ -126,7 +126,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from patient2 where Patientid=?";
+			String sql = "select * from patient where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 			
@@ -182,7 +182,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "update patient2 "
+			String sql = "update patient "
 						+ " set first_name=?, last_name=?, email=?"
 						+ " where id=?";
 
@@ -210,7 +210,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "delete from patient2 where id=?";
+			String sql = "delete from patient where id=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
