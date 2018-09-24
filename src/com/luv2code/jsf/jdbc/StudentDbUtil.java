@@ -116,7 +116,7 @@ public class StudentDbUtil {
 		}
 		
 	}
-	
+	//Bug
 	public Student getStudent(int studentId) throws Exception {
 	
 		Connection myConn = null;
