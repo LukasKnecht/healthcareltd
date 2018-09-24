@@ -1,22 +1,50 @@
-JSF for Beginners -- JDBC Database Example
-==========================================
+| Language | Framework | Platform | Author |
+| -------- | -------- |--------|--------|
+| Java | JSF | Azure Web App, Virtual Machine| Lukas Knecht|
 
-This directory contains the source code and SQL scripts for the JSF JDBC example.
 
-I created multiple versions of the application.
+# Doctor Medical System - JAVA JSF web application 
 
-> Version 1: contains only the code for listing students
+Prerequisites
+- JavaSE - 1.8 
+- Microsoft SQL Server 
+- Eclipise with Azure Plugin
+- Microsoft Azure Account
 
-> Version 2: builds on version 1 and adds code for adding students
+Installing
+Import the maven project in eclipise 
+Deploy the whole project (root) using the azure plugin to a newwebapp 
 
-> Version 3: builds on version 2 and adds code for updating students
+Built With
+Maven - Dependency Management - https://maven.apache.org/
+JavaServer Faces Technology - http://www.oracle.com/technetwork/%20java/javaee/javaserverfaces-139869.html
 
-> Version 4: builds on version 3 and adds code deleting students
+Authors:
+Lukas Knecht
+    - Project Structure 
+    - Patient Management (Create, Update and Delete Patient) 
+    - SQL Connection
 
-> Final Version: contains combination of all versions
+Jun Park 
+    - Login
+    - Frontend
+    - Calender view of appointments
+    
+Brandi 
+    - Appointment Management (Create, Update, Delete)
 
-If you want to walk through app like I do in the separate videos then you can pick the appropriate version.
+Jelisha
+    - Search patient
 
-If you want to see all of the code for the final app, then just choose the final app version.
-
+Aashna 
+    -Search Appointments
+    
+Mawgee
+   - SQL Architecture
+   - Database Development
+   - Calender view of appointments
+    
+   
+    
+    
 
