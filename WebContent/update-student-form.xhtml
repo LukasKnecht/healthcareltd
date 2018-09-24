@@ -30,13 +30,19 @@
 		<h:form id="form" style="margin-top: 10px;" >
 			<h:panelGrid columns="3">
 			
+				
 				<h:outputLabel>First name:</h:outputLabel> <h:inputText value="#{student.firstName}" id="firstName" /> <h:message for="firstName" />
 	
 				<h:outputLabel>Last name:</h:outputLabel> <h:inputText value="#{student.lastName}" id="lastName" /> <h:message for="lastName" />
+				
+				<h:outputLabel>Mobilephone:</h:outputLabel> <h:inputText value="#{student.mobilephonenumber}" id="mobilephonenumber" /> <h:message for="mobilephonenumber" />
 	
 				<h:outputLabel>Email:</h:outputLabel> <h:inputText value="#{student.email}" id="email" 
 									required="true"
-            							requiredMessage="Your email is mandatory."/> 	<h:message for="email"  />
+            							requiredMessage="Your email is mandatory."/> 	<h:message for="email" />
+            							
+            	<h:outputLabel>City:</h:outputLabel> <h:inputText value="#{student.city}" id="city" /> <h:message for="city" />
+				
 				
 				 <h:inputHidden value="#{student.id}" />
 				

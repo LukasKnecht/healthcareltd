@@ -183,16 +183,19 @@ public class StudentDbUtil {
 			myConn = getConnection();
 
 			String sql = "update patient "
-						+ " set first_name=?, last_name=?, email=?"
+						+ " set Firstname=?, Lastname=?, Mobilephonenumber=?, Email=?, City=?"
 						+ " where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params
+			
 			myStmt.setString(1, theStudent.getFirstName());
 			myStmt.setString(2, theStudent.getLastName());
-			myStmt.setString(3, theStudent.getEmail());
-			myStmt.setInt(4, theStudent.getId());
+			myStmt.setString(3, theStudent.getMobilephonenumber());
+			myStmt.setString(4, theStudent.getEmail());
+			myStmt.setString(5, theStudent.getCity());
+			myStmt.setInt(6, theStudent.getId());
 			
 			myStmt.execute();
 		}
