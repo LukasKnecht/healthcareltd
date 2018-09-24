@@ -184,7 +184,7 @@ public class StudentDbUtil {
 
 			String sql = "update patient "
 						+ " set first_name=?, last_name=?, email=?"
-						+ " where id=?";
+						+ " where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
