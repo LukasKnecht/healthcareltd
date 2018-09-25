@@ -20,7 +20,7 @@ public class Student {
     private String postcode;
     private String city;
     private String state;
-    //Test
+    
 	
 	public Student() {
 	}
