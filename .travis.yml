@@ -4,5 +4,4 @@ jdk:
 dist: trusty
 mono: none
 
-script:
-- dotnet build --no-restore
+
