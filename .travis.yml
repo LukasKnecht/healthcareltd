@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
 dist: trusty
 mono: none
-
+before_install: ant clean
 
 deploy:
   provider: azure_web_apps
