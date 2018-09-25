@@ -1,5 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+dist: trusty
+mono: none
 
-script: ant build
+script:
+- dotnet build --no-restore
