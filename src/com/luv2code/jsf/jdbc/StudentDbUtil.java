@@ -49,7 +49,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from patient2";
+			String sql = "select * from patient";
 
 			myStmt = myConn.createStatement();
 
@@ -98,7 +98,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into patient2 (Firstname, Lastname, Mobilephonenumber, Email, City) values (?, ?, ?, ?, ?)";
+			String sql = "insert into patient (Firstname, Lastname, Mobilephonenumber, Email, City) values (?, ?, ?, ?, ?)";
 
 			myStmt = myConn.prepareStatement(sql);
 
@@ -116,7 +116,7 @@ public class StudentDbUtil {
 		}
 		
 	}
-	
+	//Bug
 	public Student getStudent(int studentId) throws Exception {
 	
 		Connection myConn = null;
@@ -126,7 +126,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from patient2 where Patientid=?";
+			String sql = "select * from patient where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 			
@@ -182,17 +182,20 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "update patient2 "
-						+ " set first_name=?, last_name=?, email=?"
-						+ " where id=?";
+			String sql = "update patient "
+						+ " set Firstname=?, Lastname=?, Mobilephonenumber=?, Email=?, City=?"
+						+ " where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params
+			
 			myStmt.setString(1, theStudent.getFirstName());
 			myStmt.setString(2, theStudent.getLastName());
-			myStmt.setString(3, theStudent.getEmail());
-			myStmt.setInt(4, theStudent.getId());
+			myStmt.setString(3, theStudent.getMobilephonenumber());
+			myStmt.setString(4, theStudent.getEmail());
+			myStmt.setString(5, theStudent.getCity());
+			myStmt.setInt(6, theStudent.getId());
 			
 			myStmt.execute();
 		}
@@ -210,7 +213,7 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "delete from patient2 where id=?";
+			String sql = "delete from patient where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
