@@ -148,4 +148,15 @@ public class StudentController {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 	
+	public List<Student> searchPatient(String input){
+		//Search for a patient using given input
+		List<Student> searchResults = new ArrayList<Student>();
+		for(int i = 0; i < students.size(); i++) {
+			if(students.get(i).getFirstName() == input || students.get(i).getLastName() == input) {
+				searchResults.add(students.get(i));
+			}
+		}
+		return searchResults;
+	}
+	
 }
