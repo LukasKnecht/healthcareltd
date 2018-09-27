@@ -12,21 +12,21 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class StudentDbUtil {
+public class PatientDbUtil {
 
-	private static StudentDbUtil instance;
+	private static PatientDbUtil instance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/student_tracker";
 	
-	public static StudentDbUtil getInstance() throws Exception {
+	public static PatientDbUtil getInstance() throws Exception {
 		if (instance == null) {
-			instance = new StudentDbUtil();
+			instance = new PatientDbUtil();
 		}
 		
 		return instance;
 	}
 	
-	private StudentDbUtil() throws Exception {		
+	private PatientDbUtil() throws Exception {		
 		dataSource = getDataSource();
 	}
 
@@ -38,9 +38,9 @@ public class StudentDbUtil {
 		return theDataSource;
 	}
 		
-	public List<Student> getStudents() throws Exception {
+	public List<Patient> getPatients() throws Exception {
 
-		List<Student> students = new ArrayList<>();
+		List<Patient> patients = new ArrayList<>();
 
 		Connection myConn = null;
 		Statement myStmt = null;
@@ -75,22 +75,22 @@ public class StudentDbUtil {
 			    String city = myRs.getString("city");
 			    String state = myRs.getString("State");
 
-				// create new student object
-				//Student tempStudent = new Student(id, firstName, lastName,email);
-			    Student tempStudent = new Student(id, title, firstName, lastName, mobilephonenumber, homephonenumber,email, gender, dateofbirth, streetname, streetnumber, suburb, postcode, city, state);
+				// create new patient object
+				//Patient tempPatient = new Patient(id, firstName, lastName,email);
+			    Patient tempPatient = new Patient(id, title, firstName, lastName, mobilephonenumber, homephonenumber,email, gender, dateofbirth, streetname, streetnumber, suburb, postcode, city, state);
 
-				// add it to the list of students
-				students.add(tempStudent);
+				// add it to the list of patients
+				patients.add(tempPatient);
 			}
 			
-			return students;		
+			return patients;		
 		}
 		finally {
 			close (myConn, myStmt, myRs);
 		}
 	}
 
-	public void addStudent(Student theStudent) throws Exception {
+	public void addPatient(Patient thePatient) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -103,11 +103,11 @@ public class StudentDbUtil {
 			myStmt = myConn.prepareStatement(sql);
 
 			// set parameter
-			myStmt.setString(1, theStudent.getFirstName());
-			myStmt.setString(2, theStudent.getLastName());
-			myStmt.setString(3, theStudent.getMobilephonenumber());
-			myStmt.setString(4, theStudent.getEmail());
-			myStmt.setString(5, theStudent.getCity());
+			myStmt.setString(1, thePatient.getFirstName());
+			myStmt.setString(2, thePatient.getLastName());
+			myStmt.setString(3, thePatient.getMobilephonenumber());
+			myStmt.setString(4, thePatient.getEmail());
+			myStmt.setString(5, thePatient.getCity());
 			
 			myStmt.execute();			
 		}
@@ -117,7 +117,7 @@ public class StudentDbUtil {
 		
 	}
 	//Bug
-	public Student getStudent(int studentId) throws Exception {
+	public Patient getPatient(int patientId) throws Exception {
 	
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -131,11 +131,11 @@ public class StudentDbUtil {
 			myStmt = myConn.prepareStatement(sql);
 			
 			// set params
-			myStmt.setInt(1, studentId);
+			myStmt.setInt(1, patientId);
 			
 			myRs = myStmt.executeQuery();
 
-			Student theStudent = null;
+			Patient thePatient = null;
 			
 			// retrieve data from result set row
 			if (myRs.next()) {
@@ -160,21 +160,21 @@ public class StudentDbUtil {
 			    String city = myRs.getString("city");
 			    String state = myRs.getString("State");
 
-				theStudent = new Student(id, title, firstName, lastName, mobilephonenumber, homephonenumber,email, gender, dateofbirth, streetname, streetnumber, suburb, postcode, city, state);
+				thePatient = new Patient(id, title, firstName, lastName, mobilephonenumber, homephonenumber,email, gender, dateofbirth, streetname, streetnumber, suburb, postcode, city, state);
 				
 			}
 			else {
-				throw new Exception("Could not find student id: " + studentId);
+				throw new Exception("Could not find patient id: " + patientId);
 			}
 
-			return theStudent;
+			return thePatient;
 		}
 		finally {
 			close (myConn, myStmt, myRs);
 		}
 	}
 	
-	public void updateStudent(Student theStudent) throws Exception {
+	public void updatePatient(Patient thePatient) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -182,20 +182,17 @@ public class StudentDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "update patient "
-						+ " set Firstname=?, Lastname=?, Mobilephonenumber=?, Email=?, City=?"
+			String sql = "update patient"
+						+ " set Firstname=?, Lastname=?, Email=?"
 						+ " where Patientid=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params
-			
-			myStmt.setString(1, theStudent.getFirstName());
-			myStmt.setString(2, theStudent.getLastName());
-			myStmt.setString(3, theStudent.getMobilephonenumber());
-			myStmt.setString(4, theStudent.getEmail());
-			myStmt.setString(5, theStudent.getCity());
-			myStmt.setInt(6, theStudent.getId());
+			myStmt.setString(1, thePatient.getFirstName());
+			myStmt.setString(2, thePatient.getLastName());
+			myStmt.setString(3, thePatient.getEmail());
+			myStmt.setInt(4, thePatient.getId());
 			
 			myStmt.execute();
 		}
@@ -205,7 +202,7 @@ public class StudentDbUtil {
 		
 	}
 	
-	public void deleteStudent(int studentId) throws Exception {
+	public void deletePatient(int patientId) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -218,7 +215,7 @@ public class StudentDbUtil {
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params
-			myStmt.setInt(1, studentId);
+			myStmt.setInt(1, patientId);
 			
 			myStmt.execute();
 		}

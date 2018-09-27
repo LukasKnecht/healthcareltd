@@ -3,7 +3,7 @@ package com.luv2code.jsf.jdbc;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
-public class Student {
+public class Patient {
 
     private int id;
     private String title;
@@ -20,12 +20,11 @@ public class Student {
     private String postcode;
     private String city;
     private String state;
-    
 	
-	public Student() {
+	public Patient() {
 	}
 	
-	public Student(int id, String title, String firstName, String lastName, String mobilephonenumber, String homephonenumber, String email, String gender,String dateofbirth, String streetname, String streetnumber, String suburb, String postcode, String city, String state) {
+	public Patient(int id, String title, String firstName, String lastName, String mobilephonenumber, String homephonenumber, String email, String gender,String dateofbirth, String streetname, String streetnumber, String suburb, String postcode, String city, String state) {
 		
 		this.id = id;
 		this.title = title;
@@ -163,12 +162,11 @@ public class Student {
 	public void setState(String state) {
 		this.state = state;
 	}
-
-	@Override
-	public String toString() {
-		//return "Student [id=" + id + ", firstName=" + firstName + ", lastName="+ lastName + ", email=" + email + "]";
-		//return "Student[id=" + id + ", title=" + title + ", firstName=" + firstName +", lastName=" + lastName + ", mobilephonenumber=" + mobilephonenumber + ", "+ "homephonenumber=" + homephonenumber +", "+ "email=" + email +", "+ "gender=" + gender + ", "+ "streetname=" + streetname +", "+ "streetnumber=" + streetnumber + ","+ "suburb=" + suburb + ","+ "postcode=" + postcode +","+ "city=" + city + ","+ "state=" + state + ","]";
-		return "Student[id=" + id + ", title=" + title + ", firstName=" + firstName +", lastName=" + lastName + ", mobilephonenumber=" + mobilephonenumber + ", "+ "homephonenumber=" + homephonenumber +", "+ "email=" + email +", "+ "gender=" + gender + "]";
-	}
+//@Override
+//	public String toString() {
+//		//return "Student [id=" + id + ", firstName=" + firstName + ", lastName="+ lastName + ", email=" + email + "]";
+//		//return "Student[id=" + id + ", title=" + title + ", firstName=" + firstName +", lastName=" + lastName + ", mobilephonenumber=" + mobilephonenumber + ", "+ "homephonenumber=" + homephonenumber +", "+ "email=" + email +", "+ "gender=" + gender + ", "+ "streetname=" + streetname +", "+ "streetnumber=" + streetnumber + ","+ "suburb=" + suburb + ","+ "postcode=" + postcode +","+ "city=" + city + ","+ "state=" + state + ","]";
+//		return "Student[id=" + id + ", title=" + title + ", firstName=" + firstName +", lastName=" + lastName + ", mobilephonenumber=" + mobilephonenumber + ", "+ "homephonenumber=" + homephonenumber +", "+ "email=" + email +", "+ "gender=" + gender + "]";
+//	}
 
 }
