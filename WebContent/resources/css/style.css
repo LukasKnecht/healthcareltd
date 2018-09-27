@@ -41,7 +41,7 @@ html,body{
 #container form#find input {border: 1px solid #ccc; border-radius: 3px; padding: 5px 10px; width: 86%;}
 #container #content {margin-top: 20px;}
 
-.add-student-button {
+.add-button {
 	border: 1px solid #666; 
 	border-radius: 5px; 
 	padding: 4px; 

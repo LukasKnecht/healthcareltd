@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class PatientController {
 
+	private List<Patient> searchResults;
 	private List<Patient> patients;
 	private PatientDbUtil patientDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
@@ -26,6 +27,9 @@ public class PatientController {
 		patientDbUtil = PatientDbUtil.getInstance();
 	}
 	
+	public List<Patient> getSearchResults(){
+		return searchResults;
+	}
 	public List<Patient> getPatients() {
 		return patients;
 	}
@@ -146,6 +150,22 @@ public class PatientController {
 	private void addErrorMessage(Exception exc) {
 		FacesMessage message = new FacesMessage("Error: " + exc.getMessage());
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	public void searchPatient(String input){
+
+		//Search for a patient using given input
+
+		for(int i = 0; i < patients.size(); i++) {
+
+			if(patients.get(i).getFirstName() == input || patients.get(i).getLastName() == input) {
+
+				searchResults.add(patients.get(i));
+
+			}
+
+		}
+
 	}
 	
 }
