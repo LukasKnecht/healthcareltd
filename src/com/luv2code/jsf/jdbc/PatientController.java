@@ -14,54 +14,54 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class StudentController {
+public class PatientController {
 
-	private List<Student> students;
-	private StudentDbUtil studentDbUtil;
+	private List<Patient> patients;
+	private PatientDbUtil patientDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	public StudentController() throws Exception {
-		students = new ArrayList<>();
+	public PatientController() throws Exception {
+		patients = new ArrayList<>();
 		
-		studentDbUtil = StudentDbUtil.getInstance();
+		patientDbUtil = PatientDbUtil.getInstance();
 	}
 	
-	public List<Student> getStudents() {
-		return students;
+	public List<Patient> getPatients() {
+		return patients;
 	}
 
-	public void loadStudents() {
+	public void loadPatients() {
 
-		logger.info("Loading students");
+		logger.info("Loading patients");
 		
-		students.clear();
+		patients.clear();
 
 		try {
 			
-			// get all students from database
-			students = studentDbUtil.getStudents();
+			// get all patients from database
+			patients = patientDbUtil.getPatients();
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error loading students", exc);
+			logger.log(Level.SEVERE, "Error loading patients", exc);
 			
 			// add error message for JSF page
 			addErrorMessage(exc);
 		}
 	}
 		
-	public String addStudent(Student theStudent) {
+	public String addPatient(Patient thePatient) {
 
-		logger.info("Adding student: " + theStudent);
+		logger.info("Adding patient: " + thePatient);
 
 		try {
 			
-			// add student to the database
-			studentDbUtil.addStudent(theStudent);
+			// add patient to the database
+			patientDbUtil.addPatient(thePatient);
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error adding students", exc);
+			logger.log(Level.SEVERE, "Error adding patients", exc);
 			
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -69,26 +69,26 @@ public class StudentController {
 			return null;
 		}
 		
-		return "list-students?faces-redirect=true";
+		return "list-patients?faces-redirect=true";
 	}
 
-	public String loadStudent(int studentId) {
+	public String loadPatient(int patientId) {
 		
-		logger.info("loading student: " + studentId);
+		logger.info("loading patient: " + patientId);
 		
 		try {
-			// get student from database
-			Student theStudent = studentDbUtil.getStudent(studentId);
+			// get patient from database
+			Patient thePatient = patientDbUtil.getPatient(patientId);
 			
 			// put in the request attribute ... so we can use it on the form page
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
 
 			Map<String, Object> requestMap = externalContext.getRequestMap();
-			requestMap.put("student", theStudent);	
+			requestMap.put("patient", thePatient);	
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error loading student id:" + studentId, exc);
+			logger.log(Level.SEVERE, "Error loading patient id:" + patientId, exc);
 			
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -96,21 +96,21 @@ public class StudentController {
 			return null;
 		}
 				
-		return "update-student-form.xhtml";
+		return "update-patient-form.xhtml";
 	}	
 	
-	public String updateStudent(Student theStudent) {
+	public String updatePatient(Patient thePatient) {
 
-		logger.info("updating student: " + theStudent);
+		logger.info("updating patient: " + thePatient);
 		
 		try {
 			
-			// update student in the database
-			studentDbUtil.updateStudent(theStudent);
+			// update patient in the database
+			patientDbUtil.updatePatient(thePatient);
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error updating student: " + theStudent, exc);
+			logger.log(Level.SEVERE, "Error updating patient: " + thePatient, exc);
 			
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -118,21 +118,21 @@ public class StudentController {
 			return null;
 		}
 		
-		return "list-students?faces-redirect=true";		
+		return "list-patients?faces-redirect=true";		
 	}
 	
-	public String deleteStudent(int studentId) {
+	public String deletePatient(int patientId) {
 
-		logger.info("Deleting student id: " + studentId);
+		logger.info("Deleting patient id: " + patientId);
 		
 		try {
 
-			// delete the student from the database
-			studentDbUtil.deleteStudent(studentId);
+			// delete the patient from the database
+			patientDbUtil.deletePatient(patientId);
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error deleting student id: " + studentId, exc);
+			logger.log(Level.SEVERE, "Error deleting patient id: " + patientId, exc);
 			
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -140,7 +140,7 @@ public class StudentController {
 			return null;
 		}
 		
-		return "list-students";	
+		return "list-patients";	
 	}	
 	
 	private void addErrorMessage(Exception exc) {
