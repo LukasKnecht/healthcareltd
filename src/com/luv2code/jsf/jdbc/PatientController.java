@@ -15,7 +15,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class PatientController {
-
+	
+	private String searchInput;
 	private List<Patient> searchResults;
 	private List<Patient> patients;
 	private PatientDbUtil patientDbUtil;
@@ -23,13 +24,22 @@ public class PatientController {
 	
 	public PatientController() throws Exception {
 		patients = new ArrayList<>();
-		
+		searchResults = new ArrayList<>();
 		patientDbUtil = PatientDbUtil.getInstance();
+	}
+	
+	public String getSearchInput() {
+		return searchInput;
+	}
+	
+	public void setSearchInput(String input) {
+		searchInput = input;
 	}
 	
 	public List<Patient> getSearchResults(){
 		return searchResults;
 	}
+	
 	public List<Patient> getPatients() {
 		return patients;
 	}
@@ -83,7 +93,7 @@ public class PatientController {
 		try {
 			// get patient from database
 			Patient thePatient = patientDbUtil.getPatient(patientId);
-			
+			searchResults.add(thePatient);
 			// put in the request attribute ... so we can use it on the form page
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
 
@@ -152,20 +162,39 @@ public class PatientController {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 	
-	public void searchPatient(String input){
+	public String searchPatient(){
 
 		//Search for a patient using given input
-
-		for(int i = 0; i < patients.size(); i++) {
-
-			if(patients.get(i).getFirstName() == input || patients.get(i).getLastName() == input) {
-
-				searchResults.add(patients.get(i));
-
+		try {
+			if(!patients.isEmpty()){
+				for(int i = 0; i < patients.size(); i++) {
+					String firstName = patients.get(i).getFirstName();
+					String lastName = patients.get(i).getLastName();
+					String fullName = firstName + " " + lastName;
+					
+					if(firstName.equals(searchInput) || lastName.equals(searchInput) || fullName.equals(searchInput)) {
+						loadPatient(patients.get(i).getId());
+					}
+				}
 			}
-
+			else {
+				System.out.println("No patients to search.");
+			}
+			
+		}catch(Exception exc) {
+			logger.log(Level.SEVERE, "Error found when searching for patients", exc);
+			return null;
 		}
-
+		return "list-results";
+	}
+	
+	public String clearResults() {
+		if(!searchResults.isEmpty()) {
+			searchResults.clear();
+		}else{
+			System.out.println("Already empty");
+		}
+		return "results cleared";
 	}
 	
 }
