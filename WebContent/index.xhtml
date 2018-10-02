@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Student Tracker App</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Healthcareltd - Welcome</h2>
+		</div>
+	</div>
+
+	<div id="container">
+
+		<div id="content">
+		
+			<h:messages globalOnly="true" />
+			<h:button value="Home" styleClass="add-student-button" outcome="index"/>
+			<h:button value="Patient overview" styleClass="add-student-button" outcome="list-students"/>
+			<h:button value="Add Patient" styleClass="add-student-button" outcome="add-student-form"/>	
+			<h:button value="Appointment overview" styleClass="add-student-button" outcome="list-appointments"/>
+			<h:button value="Add Appointment" styleClass="add-student-button" outcome="add-appointments"/>	
+			<h:button value="Search" styleClass="add-student-button" outcome="search"/>
+		</div>
+		
+	</div>
+
+</h:body>
+</html>
