@@ -1,2 +1,6 @@
 language: java
-sudo: false
+jdk:
+  - oraclejdk8
+dist: trusty
+mono: none
+before_install: ant clean
