@@ -8,8 +8,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<title>Login</title>
-	
+	<style>
+	.info{
+	color: red;
+	border: 1px solid;
+	}
+	</style>
 	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="add-student-style.css"  />
 	
 </h:head>
 
@@ -17,18 +23,37 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>Login</h2>
+			<h2>Login to Healthcare Application</h2>
 		</div>
 	</div>
-
+	
 	<div id="container">
+		<h3>Login</h3>
 
-		<div id="content">
-			
-
-		</div>
 		
-	</div>
+		<h:form id="form" style="margin-top: 10px;" >
+			<h:panelGrid columns="3">
+			
+				
+				<h:outputLabel>User name:</h:outputLabel> <h:inputText value="#{userpw.username}" id="username" required="true"
+            							requiredMessage="Please enter Username."/> <h:message for="username" />
+	
+				<h:outputLabel>Password:</h:outputLabel> <h:inputSecret value="#{userpw.password}" id="password" type="password" required="true"
+            							requiredMessage="Please enter Password."/> <h:message for="password" />
+				
+		
+				
+				 
 
+				<h:commandButton value="submit" styleClass="save" action="#{userpwController.loginAction(userpw)}"/>
+			
+			</h:panelGrid>
+		</h:form>
+
+		<div style="clear: both;"></div>
+		<h:messages globalOnly="true" infoClass="info" />
+	
+
+	</div>	
 </h:body>
 </html>

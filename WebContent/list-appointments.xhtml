@@ -12,29 +12,24 @@
 	<h:outputStylesheet library="css" name="style.css"  />
 	
 </h:head>
-
 <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="100" resizable="false" closable="false" collapsible="false">
+                <h:form>
+                    <ui:include src="../header.xhtml" />
+                </h:form>
+            </p:layoutUnit>
 
-	<div id="wrapper">
-		<div id="header">
-			<h2>Healthcareltd - Appointments</h2>
-		</div>
-	</div>
+            <p:layoutUnit position="west" size="200" resizable="false" closable="false" collapsible="false">
+                <h:form>
+                    <ui:include src="../leftpanel.xhtml" />
+                </h:form>
+            </p:layoutUnit>
 
-	<div id="container">
 
-		<div id="content">
-		
-			<h:messages globalOnly="true" />
-			<h:button value="Home" styleClass="add-student-button" outcome="index"/>
-			<h:button value="Patient overview" styleClass="add-student-button" outcome="list-students"/>
-			<h:button value="Add Patient" styleClass="add-student-button" outcome="add-student-form"/>	
-			<h:button value="Appointment overview" styleClass="add-student-button" outcome="list-appointments"/>
-			<h:button value="Add Appointment" styleClass="add-student-button" outcome="add-appointments"/>
-			<h:button value="Search" styleClass="add-student-button" outcome="search"/>	
-		</div>
-		
-	</div>
-
-</h:body>
+            <p:layoutUnit position="center">
+                <ui:insert name="content">Blank</ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
 </html>
