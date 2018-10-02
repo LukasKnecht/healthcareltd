@@ -5,6 +5,7 @@
 	
 <f:metadata>
   <f:event type="preRenderView" listener="#{patientController.loadPatients()}"/>
+  <f:event type="preRenderView" listener="#{appointmentController.loadAppointments()}"/>
 </f:metadata>
 
 <h:head>
@@ -38,26 +39,30 @@
 			<h:button value="Search" styleClass="add-button" outcome="search"/>
 			
 			<h:form class="PatientController">
-				<h:inputText type="text" id="search" value="#{patientController.searchInput}"> </h:inputText>
+				<h:inputText type="text" id="search" value="#{patientController.patientSearchInput}"> </h:inputText>
 				<h:commandButton 
 					value="Search by patient" 
 					action="#{patientController.searchPatient()}">
 				</h:commandButton>
-				<h:commandButton
-					value="Search by Appointment"
-					action="#{appointmentController.searchAppointment()}"></h:commandButton>
 				<h:commandButton value="Clear Results" action="#{patientController.clearResults()}"></h:commandButton>
+			</h:form>
+			<h:form class="AppointmentController">
+				<h:inputText type="text" id="search" value="#{appointmentController.appointmentSearchInput}"> </h:inputText>
+				<h:commandButton
+						value="Search by Appointment"
+						action="#{appointmentController.searchAppointment()}">
+				</h:commandButton>
+				<h:commandButton value="Clear Results" action="#{appointmentController.clearResults()}"></h:commandButton>
 			</h:form>
 			
 			<h:panelGrid 
-				rendered="#{not empty patientController.searchResults}">
+				rendered="#{not empty patientController.patientSearchResults}">
 			<h:form>
 						
-			<h:dataTable value="#{patientController.searchResults}" var="tempPatient"
+			<h:dataTable value="#{patientController.patientSearchResults}" var="tempPatient"
 				styleClass="demo-table" 
 				headerClass="demo-table-header"
-				rowClasses="demo-table-odd-row,demo-table-even-row"
-				>
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 					
 				<h:column>
 					<!-- the column header -->
@@ -102,6 +107,62 @@
 			</h:dataTable>
 
 			</h:form>
+			</h:panelGrid>
+			
+			<h:panelGrid rendered="#{not empty appointmentController.appointmentSearchResults}">
+				
+				<h:form>
+							
+				<h:dataTable value="#{appointmentController.appointmentSearchResults}" var="tempAppointment"
+					styleClass="demo-table" 
+					headerClass="demo-table-header"
+					rowClasses="demo-table-odd-row,demo-table-even-row">
+					
+					
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Appointment Title</f:facet>
+	
+						<!--  the value for each row -->
+						#{tempAppointment.title}
+					</h:column>
+					
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Appointment Start Day</f:facet>
+	
+						<!--  the value for each row -->
+						#{tempAppointment.startDay}
+					</h:column>
+	
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Appointment Start Time</f:facet>
+	
+						<!--  the value for each row -->
+						#{tempAppointment.startTime}
+					</h:column>
+					
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Appointment End Time</f:facet>
+	
+						<!--  the value for each row -->
+						#{tempAppointment.endTime}
+					</h:column>
+	
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Appointment Notes</f:facet>
+	
+						<!--  the value for each row -->
+						#{tempAppointment.notes}
+					</h:column>
+	
+				</h:dataTable>
+	
+				</h:form>
+			
 			</h:panelGrid>
 
 		</div>

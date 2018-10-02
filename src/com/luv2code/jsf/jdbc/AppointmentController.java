@@ -17,14 +17,29 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 
 public class AppointmentController {
+	
+	private String appointmentSearchInput;
+	private List<Appointment> appointmentSearchResults;
 	private List<Appointment> appointments;
 	private AppointmentDbUtil appointmentDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	public AppointmentController() throws Exception {
 		appointments = new ArrayList<>();
-		
+		appointmentSearchResults = new ArrayList<>();
 		appointmentDbUtil = AppointmentDbUtil.getInstance();
+	}
+	
+	public String getAppointmentSearchInput() {
+		return appointmentSearchInput;
+	}
+	
+	public void setAppointmentSearchInput(String input) {
+		appointmentSearchInput = input;
+	}
+	
+	public List<Appointment> getAppointmentSearchResults(){
+		return appointmentSearchResults;
 	}
 	
 	public List<Appointment> getAppointments() {
@@ -81,7 +96,7 @@ public class AppointmentController {
 		try {
 			// get appointment from database
 			Appointment theAppointment = appointmentDbUtil.getAppointment(appointmentId);
-			
+			appointmentSearchResults.add(theAppointment);
 			// put in the request attribute ... so we can use it on the form page
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
 
@@ -144,6 +159,36 @@ public class AppointmentController {
 		
 		return "list-appointments";	
 	}	
+	
+	public String searchAppointment() {
+		try {
+			if(!appointments.isEmpty()) {
+				for(int i = 0; i < appointments.size(); i++) {
+					if (appointments.get(i).getTitle().equals(appointmentSearchInput)) {
+						loadAppointment(appointments.get(i).getAppointmentId());
+						System.out.println("Found");
+						}
+				}
+			}else {
+				System.out.println("No appointments to search for");
+			}
+			
+		}catch(Exception exc) {
+			logger.log(Level.SEVERE, "Error found when searching for appointments", exc);
+			addErrorMessage(exc);
+			
+		}
+		return "list-results";
+	}
+	
+	public String clearResults() {
+		if(!appointmentSearchResults.isEmpty()) {
+			appointmentSearchResults.clear();
+		}else{
+			System.out.println("Already empty");
+		}
+		return "results cleared";
+	}
 	
 	private void addErrorMessage(Exception exc) {
 		FacesMessage message = new FacesMessage("Error: " + exc.getMessage());

@@ -16,28 +16,28 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class PatientController {
 	
-	private String searchInput;
-	private List<Patient> searchResults;
+	private String patientSearchInput;
+	private List<Patient> patientSearchResults;
 	private List<Patient> patients;
 	private PatientDbUtil patientDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	public PatientController() throws Exception {
 		patients = new ArrayList<>();
-		searchResults = new ArrayList<>();
+		patientSearchResults = new ArrayList<>();
 		patientDbUtil = PatientDbUtil.getInstance();
 	}
 	
-	public String getSearchInput() {
-		return searchInput;
+	public String getpatientSearchInput() {
+		return patientSearchInput;
 	}
 	
-	public void setSearchInput(String input) {
-		searchInput = input;
+	public void setpatientSearchInput(String input) {
+		patientSearchInput = input;
 	}
 	
-	public List<Patient> getSearchResults(){
-		return searchResults;
+	public List<Patient> getpatientSearchResults(){
+		return patientSearchResults;
 	}
 	
 	public List<Patient> getPatients() {
@@ -93,7 +93,7 @@ public class PatientController {
 		try {
 			// get patient from database
 			Patient thePatient = patientDbUtil.getPatient(patientId);
-			searchResults.add(thePatient);
+			patientSearchResults.add(thePatient);
 			// put in the request attribute ... so we can use it on the form page
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
 
@@ -172,7 +172,7 @@ public class PatientController {
 					String lastName = patients.get(i).getLastName();
 					String fullName = firstName + " " + lastName;
 					
-					if(firstName.equals(searchInput) || lastName.equals(searchInput) || fullName.equals(searchInput)) {
+					if(firstName.equals(patientSearchInput) || lastName.equals(patientSearchInput) || fullName.equals(patientSearchInput)) {
 						loadPatient(patients.get(i).getId());
 					}
 				}
@@ -189,8 +189,8 @@ public class PatientController {
 	}
 	
 	public String clearResults() {
-		if(!searchResults.isEmpty()) {
-			searchResults.clear();
+		if(!patientSearchResults.isEmpty()) {
+			patientSearchResults.clear();
 		}else{
 			System.out.println("Already empty");
 		}
